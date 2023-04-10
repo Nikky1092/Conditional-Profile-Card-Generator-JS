@@ -29,18 +29,53 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
-  // reset the website body with the new html output
+  let fullName = `<h1>${variables.name} ${variables.lastname}</h1>`;
+  if (variables.name == null && variables.lastname == null) {
+    fullName = `<h1>Name Surname</h1>`;
+  } else if (variables.name == null) {
+    fullName = `<h1>Name  ${variables.lastname}</h1>`;
+  } else if (variables.lastname == null) {
+    fullName = `<h1>${variables.name}  Surname</h1>`;
+  }
+  let profession = `<h2>${variables.role}</h2>`;
+  if (variables.role == null) profession = `<h2>choose a role</h2>`;
+
+  let origin = `<h3>${variables.city}, ${variables.country}</h3>`;
+  if (variables.city == null && variables.country == null) {
+    origin = `<h3>city, country</h3>`;
+  } else if (variables.country == null) {
+    origin = `<h3>${variables.city}, country</h3>`;
+  } else if (variables.city == null) {
+    origin = `<h3>city, ${variables.country}</h3>`;
+  }
+
+  let tProfile = `<li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a>${variables.twitter}</li>`;
+  if (variables.twitter == null)
+    tProfile = `<li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a>Twitter</li>`;
+
+  let gitProfile = `<li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a>${variables.github}</li>`;
+  if (variables.github == "alesanchezr")
+    gitProfile = `<li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a>Github</li>`;
+
+  let linkedinProfile = `<li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a>${variables.linkedin}</li>`;
+  if (variables.linkedin == null)
+    linkedinProfile = `<li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a>linkedIn</li>`;
+
+  let instProfile = `<li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a>${variables.instagram}</li>`;
+  if (variables.instagram == null)
+    instProfile = `<li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a>Instagram</li>`;
+
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          <h1>${fullName}</h1>
+          <h2>${profession}</h2>
+          <h3>${origin}</h3>
+          <ul class="${variables.socialMediaPosition}">
+            ${tProfile}
+            ${gitProfile}
+            ${linkedinProfile}
+            ${instProfile}
           </ul>
         </div>
     `;
